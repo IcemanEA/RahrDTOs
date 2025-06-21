@@ -12,22 +12,25 @@ public struct RequestParams: Sendable {
 	public let limit: Int?
 	public let offset: Int?
 	public let count: Int?
+	public let total: Int?
 
 	public init() {
 		self.limit = nil
 		self.offset = nil
 		self.count = nil
+		self.total = nil
 	}
 	
-	public init(limit: Int? = nil, offset: Int? = nil, count: Int? = nil) {
+	public init(limit: Int? = nil, offset: Int? = nil, count: Int? = nil, total: Int? = nil) {
 		self.limit = limit
 		self.offset = offset
 		self.count = count
+		self.total = total
 	}
 }
 
 extension RequestParams: CustomStringConvertible {
 	public var description: String {
-		"Params: count = \(String(describing: count)), limit = \(String(describing: limit)), offset = \(String(describing: offset))"
+		"Params: count records = \(String(describing: count)), limit = \(String(describing: limit)), offset = \(String(describing: offset)) total pages = \(String(describing: count))"
 	}
 }

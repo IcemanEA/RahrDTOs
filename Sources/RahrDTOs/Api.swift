@@ -16,11 +16,42 @@ public enum Api {
 	public enum V1 {
 		public static let v1 = Api.entryPoint + "/v1"
 		
+		public enum User {
+			public static let path = v1 + "/user"
+			
+			/// Basic Auth - регистрация и обновление JWT токена/
+			case registration
+			
+			/// JWT Auth - обновление notification token/
+			case token
+			
+			/// JWT Auth - авторизация внутри мобильного приложения для доп. функций/
+			case login
+			
+			public var uri: String {
+				switch self {
+				case .registration:
+					"registration"
+				case .token:
+					"token"
+				case .login:
+					"login"
+				}
+			}
+			
+			public func getUrl() -> String {
+				Self.path + "/" + uri
+			}
+		}
+		
 		/// Работа с новостями
 		public enum News {
 			public static let path = v1 + "/news"
 			
+			/// Получить список новостей
 			case list
+			
+			/// Получить одну детальную новость по её ID
 			case byId
 			
 			public var uri: String {
