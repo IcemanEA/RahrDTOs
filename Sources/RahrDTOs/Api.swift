@@ -28,6 +28,9 @@ public enum Api {
 			/// JWT Auth - авторизация внутри мобильного приложения для доп. функций/
 			case login
 			
+			/// JWT Auth - выход из системы, очистка email данных
+			case logout
+			
 			public var uri: String {
 				switch self {
 				case .registration:
@@ -36,6 +39,8 @@ public enum Api {
 					"token"
 				case .login:
 					"login"
+				case .logout:
+					"logout"
 				}
 			}
 			

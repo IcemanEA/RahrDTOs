@@ -12,18 +12,30 @@ public struct CreateUserRequestDTO: Codable, Sendable {
 	public let os: String
 	public let name: String
 	public let password: String
+	
+	public init(os: String, name: String, password: String) {
+		self.os = os
+		self.name = name
+		self.password = password
+	}
 }
 
 /// Модель для ответа на регистрацию, cодержит id и токен для работы основного функционала
 public struct CreateUserResponseDTO: Codable, Sendable {
 	public let id: UUID
 	public let name: String
-	public let token: String
+	public var token: String
 	
 	public init(id: UUID, name: String, token: String) {
 		self.id = id
 		self.name = name
 		self.token = token
+	}
+	
+	public func updateToken(_ token: String) -> Self {
+		var copy = self
+		copy.token = token
+		return copy
 	}
 }
 
