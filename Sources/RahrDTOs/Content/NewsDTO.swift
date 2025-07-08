@@ -13,6 +13,7 @@ public struct NewsDTO: Codable, Sendable {
 	public let title: String?
 	
 	public let dateCreate: Int?
+	public let dateUpdate: Int?
 	public let datePublic: Int?
 	public let dateReminder: Int?
 	
@@ -31,6 +32,7 @@ public struct NewsDTO: Codable, Sendable {
 		case id
 		case title
 		case dateCreate = "dt_create"
+		case dateUpdate = "dt_update"
 		case datePublic = "dt_public"
 		case dateReminder = "dt_reminder"
 		case category
@@ -47,6 +49,7 @@ public struct NewsDTO: Codable, Sendable {
 		id: UUID? = nil,
 		title: String? = nil,
 		dateCreate: Int? = nil,
+		dateUpdate: Int? = nil,
 		datePublic: Int? = nil,
 		dateReminder: Int? = nil,
 		category: String? = nil,
@@ -61,6 +64,7 @@ public struct NewsDTO: Codable, Sendable {
 		self.id = id
 		self.title = title
 		self.dateCreate = dateCreate
+		self.dateUpdate = dateUpdate
 		self.datePublic = datePublic
 		self.dateReminder = dateReminder
 		self.category = category
@@ -78,6 +82,7 @@ public struct NewsDTO: Codable, Sendable {
 		self.id = try container.decodeIfPresent(UUID.self, forKey: .id)
 		self.title = try container.decodeIfPresent(String.self, forKey: .title)
 		self.dateCreate = try container.decodeIfPresent(Int.self, forKey: .dateCreate)
+		self.dateUpdate = try container.decodeIfPresent(Int.self, forKey: .dateUpdate)
 		self.datePublic = try container.decodeIfPresent(Int.self, forKey: .datePublic)
 		self.dateReminder = try container.decodeIfPresent(Int.self, forKey: .dateReminder)
 		self.category = try container.decodeIfPresent(String.self, forKey: .category)
@@ -95,9 +100,9 @@ public struct NewsDTO: Codable, Sendable {
 
 public extension NewsDTO {
 	
-	/// Проверить, является ли новость активной (по умолчанию true)
+	/// Проверить, является ли новость активной (по умолчанию false)
 	var isActive: Bool {
-		return activeIs ?? true
+		return activeIs ?? false
 	}
 	
 	/// Проверить, опубликована ли новость
@@ -110,28 +115,8 @@ public extension NewsDTO {
 		return dateReminder != nil
 	}
 	
-	/// Получить основной текст (HTML приоритетнее Markdown)
+	/// Получить основной текст (Markdown приоритетнее HTML)
 	var mainText: String? {
-		return textHtml ?? textMd
-	}
-	
-	/// Получить текст для превью (shortText или обрезанный основной текст)
-	var previewText: String? {
-		if let shortText = shortText, !shortText.isEmpty {
-			return shortText
-		}
-		
-		// Если нет короткого текста, берем первые 200 символов основного
-		guard let mainText = mainText, !mainText.isEmpty else { return nil }
-		
-		// Простое удаление HTML тегов для превью
-		let plainText = mainText.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
-		
-		if plainText.count > 200 {
-			let endIndex = plainText.index(plainText.startIndex, offsetBy: 200)
-			return String(plainText[..<endIndex]) + "..."
-		}
-		
-		return plainText
+		return textMd ?? textHtml
 	}
 }

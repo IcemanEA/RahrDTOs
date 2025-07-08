@@ -45,7 +45,7 @@ public enum Api {
 			}
 			
 			public func getUrl() -> String {
-				Self.path + "/" + uri
+				return uri.isEmpty ? Self.path : Self.path + "/" + uri
 			}
 		}
 		
@@ -69,7 +69,7 @@ public enum Api {
 			}
 			
 			public func getUrl() -> String {
-				Self.path + "/" + uri
+				return uri.isEmpty ? Self.path : Self.path + "/" + uri
 			}
 			
 			public func getUrlWithId(_ id: String) -> String {
