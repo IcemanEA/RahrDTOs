@@ -16,8 +16,8 @@ public struct ConferenceDTO: Codable, Sendable {
 	public let shortname: String?
 	public let fullname: String?
 	public let maincity: String?
-	public let dtBegin: Int16?
-	public let dtEnd: Int16?
+	public let dtBegin: Int?
+	public let dtEnd: Int?
 	public let imageUrl: String?
 	public let programPdf: String?
 	public let seminarPdf: String?
@@ -28,6 +28,7 @@ public struct ConferenceDTO: Codable, Sendable {
 	public let photoUrl: String?
 	public let reportUrl: String?
 	public let scienceUrl: String?
+	public let thesesUrl: String?
 	
 	public enum CodingKeys: String, CodingKey {
 		case id
@@ -49,6 +50,7 @@ public struct ConferenceDTO: Codable, Sendable {
 		case photoUrl = "photo_url"
 		case reportUrl = "report_url"
 		case scienceUrl = "science_url"
+		case thesesUrl = "theses_url"
 	}
 	
 	public init(
@@ -59,8 +61,8 @@ public struct ConferenceDTO: Codable, Sendable {
 		shortname: String? = nil,
 		fullname: String? = nil,
 		maincity: String? = nil,
-		dtBegin: Int16? = nil,
-		dtEnd: Int16? = nil,
+		dtBegin: Int? = nil,
+		dtEnd: Int? = nil,
 		imageUrl: String? = nil,
 		programPdf: String? = nil,
 		seminarPdf: String? = nil,
@@ -70,7 +72,8 @@ public struct ConferenceDTO: Codable, Sendable {
 		videoUrl: String? = nil,
 		photoUrl: String? = nil,
 		reportUrl: String? = nil,
-		scienceUrl: String? = nil
+		scienceUrl: String? = nil,
+		thesesUrl: String? = nil
 	) {
 		self.id = id
 		self.dtCreate = dtCreate
@@ -91,6 +94,7 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.photoUrl = photoUrl
 		self.reportUrl = reportUrl
 		self.scienceUrl = scienceUrl
+		self.thesesUrl = thesesUrl
 	}
 	
 	public init(from decoder: any Decoder) throws {
@@ -102,8 +106,8 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.shortname = try container.decodeIfPresent(String.self, forKey: .shortname)
 		self.fullname = try container.decodeIfPresent(String.self, forKey: .fullname)
 		self.maincity = try container.decodeIfPresent(String.self, forKey: .maincity)
-		self.dtBegin = try container.decodeIfPresent(Int16.self, forKey: .dtBegin)
-		self.dtEnd = try container.decodeIfPresent(Int16.self, forKey: .dtEnd)
+		self.dtBegin = try container.decodeIfPresent(Int.self, forKey: .dtBegin)
+		self.dtEnd = try container.decodeIfPresent(Int.self, forKey: .dtEnd)
 		self.imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
 		self.programPdf = try container.decodeIfPresent(String.self, forKey: .programPdf)
 		self.seminarPdf = try container.decodeIfPresent(String.self, forKey: .seminarPdf)
@@ -114,6 +118,7 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.photoUrl = try container.decodeIfPresent(String.self, forKey: .photoUrl)
 		self.reportUrl = try container.decodeIfPresent(String.self, forKey: .reportUrl)
 		self.scienceUrl = try container.decodeIfPresent(String.self, forKey: .scienceUrl)
+		self.thesesUrl = try container.decodeIfPresent(String.self, forKey: .thesesUrl)
 	}
 }
 
