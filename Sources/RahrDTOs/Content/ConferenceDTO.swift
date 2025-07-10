@@ -18,6 +18,8 @@ public struct ConferenceDTO: Codable, Sendable {
 	public let maincity: String?
 	public let dtBegin: Int?
 	public let dtEnd: Int?
+	public let dtTheses: Int?
+	public let warningText: String?
 	public let imageUrl: String?
 	public let programPdf: String?
 	public let seminarPdf: String?
@@ -40,6 +42,8 @@ public struct ConferenceDTO: Codable, Sendable {
 		case maincity
 		case dtBegin = "dt_begin"
 		case dtEnd = "dt_end"
+		case dtTheses = "dt_theses"
+		case warningText = "warning_text"
 		case imageUrl = "image_url"
 		case programPdf = "program_pdf"
 		case seminarPdf = "seminar_pdf"
@@ -63,6 +67,8 @@ public struct ConferenceDTO: Codable, Sendable {
 		maincity: String? = nil,
 		dtBegin: Int? = nil,
 		dtEnd: Int? = nil,
+		dtTheses: Int? = nil,
+		warningText: String? = nil,
 		imageUrl: String? = nil,
 		programPdf: String? = nil,
 		seminarPdf: String? = nil,
@@ -84,6 +90,8 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.maincity = maincity
 		self.dtBegin = dtBegin
 		self.dtEnd = dtEnd
+		self.dtTheses = dtTheses
+		self.warningText = warningText
 		self.imageUrl = imageUrl
 		self.programPdf = programPdf
 		self.seminarPdf = seminarPdf
@@ -108,6 +116,8 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.maincity = try container.decodeIfPresent(String.self, forKey: .maincity)
 		self.dtBegin = try container.decodeIfPresent(Int.self, forKey: .dtBegin)
 		self.dtEnd = try container.decodeIfPresent(Int.self, forKey: .dtEnd)
+		self.dtTheses = try container.decodeIfPresent(Int.self, forKey: .dtTheses)
+		self.warningText = try container.decodeIfPresent(String.self, forKey: .warningText)
 		self.imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
 		self.programPdf = try container.decodeIfPresent(String.self, forKey: .programPdf)
 		self.seminarPdf = try container.decodeIfPresent(String.self, forKey: .seminarPdf)
@@ -119,50 +129,5 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.reportUrl = try container.decodeIfPresent(String.self, forKey: .reportUrl)
 		self.scienceUrl = try container.decodeIfPresent(String.self, forKey: .scienceUrl)
 		self.thesesUrl = try container.decodeIfPresent(String.self, forKey: .thesesUrl)
-	}
-}
-
-// MARK: - Convenience Extensions
-
-public extension ConferenceDTO {
-	
-	/// Проверить, является ли конференция активной
-	var isActive: Bool {
-		state == "active"
-	}
-	
-	/// Проверить, завершена ли конференция
-	var isComplete: Bool {
-		state == "complete"
-	}
-	
-	/// Проверить, запланирована ли конференция
-	var isPlanned: Bool {
-		state == "planned"
-	}
-	
-	/// Проверить, есть ли даты проведения
-	var hasDates: Bool {
-		dtBegin != nil && dtEnd != nil
-	}
-	
-	/// Получить продолжительность конференции в днях
-	var durationDays: Int? {
-		guard let begin = dtBegin, let end = dtEnd else { return nil }
-		return max(1, Int(end - begin) + 1)
-	}
-	
-	/// Получить основную информацию о конференции
-	var displayName: String {
-		return shortname ?? fullname ?? "Unknown Conference"
-	}
-	
-	/// Получить полное название с городом
-	var fullDisplayName: String {
-		let name = fullname ?? shortname ?? "Unknown Conference"
-		if let city = maincity {
-			return "\(name) - \(city)"
-		}
-		return name
 	}
 }
