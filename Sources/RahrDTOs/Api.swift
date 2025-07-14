@@ -24,6 +24,9 @@ public enum Api {
 	/// Корневая точка доступа к работе с конференциями
 	public static let conferences = "conferences"
 	
+	/// Корневая точка доступа к работе с профилями
+	public static let profile = "profile"
+	
 	/// Первая версия точек доступа
 	public enum V1 {
 		public static let entryPoint = "v1"
@@ -118,6 +121,45 @@ public enum Api {
 			public func getUrlWithId(_ id: String) -> String {
 				let url = Self.path + "/" + uri
 				return url.replacingOccurrences(of: ":id", with: id)
+			}
+		}
+		
+		/// Работа с профилями
+		public enum Profile {
+			public static let path = V1.path + "/" + Api.profile
+			
+			/// Получить профиль члена РАРЧ по ID
+			case byMemberId
+			
+			/// Получить профиль члена РАРЧ по RAHR_ID
+			case byRahrId
+			
+			/// Обновить профиль члена РАРЧ по ID
+			case update
+			
+			public var uri: String {
+				switch self {
+				case .byMemberId:
+					":memberId"
+				case .byRahrId:
+					"rahr/:rahrId"
+				case .update:
+					":memberId"
+				}
+			}
+			
+			public func getUrl() -> String {
+				return uri.isEmpty ? Self.path : Self.path + "/" + uri
+			}
+			
+			public func getUrlWithId(_ id: String) -> String {
+				let url = Self.path + "/" + uri
+				switch self {
+				case .byMemberId, .update:
+					return url.replacingOccurrences(of: ":memberId", with: id)
+				case .byRahrId:
+					return url.replacingOccurrences(of: ":rahrId", with: id)
+				}
 			}
 		}
 	}

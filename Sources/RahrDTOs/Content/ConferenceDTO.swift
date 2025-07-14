@@ -22,7 +22,7 @@ public struct ConferenceDTO: Codable, Sendable {
 	public let warningText: String?
 	public let imageUrl: String?
 	public let programPdf: String?
-	public let seminarPdf: String?
+	public let dtProgramPdf: Int?
 	public let priceUrl: String?
 	public let placeUrl: String?
 	public let hotelsUrl: String?
@@ -46,7 +46,7 @@ public struct ConferenceDTO: Codable, Sendable {
 		case warningText = "warning_text"
 		case imageUrl = "image_url"
 		case programPdf = "program_pdf"
-		case seminarPdf = "seminar_pdf"
+		case dtProgramPdf = "dt_program_pdf"
 		case priceUrl = "price_url"
 		case placeUrl = "place_url"
 		case hotelsUrl = "hotels_url"
@@ -71,7 +71,7 @@ public struct ConferenceDTO: Codable, Sendable {
 		warningText: String? = nil,
 		imageUrl: String? = nil,
 		programPdf: String? = nil,
-		seminarPdf: String? = nil,
+		dtProgramPdf: Int? = nil,
 		priceUrl: String? = nil,
 		placeUrl: String? = nil,
 		hotelsUrl: String? = nil,
@@ -94,7 +94,7 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.warningText = warningText
 		self.imageUrl = imageUrl
 		self.programPdf = programPdf
-		self.seminarPdf = seminarPdf
+		self.dtProgramPdf = dtProgramPdf
 		self.priceUrl = priceUrl
 		self.placeUrl = placeUrl
 		self.hotelsUrl = hotelsUrl
@@ -120,7 +120,7 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.warningText = try container.decodeIfPresent(String.self, forKey: .warningText)
 		self.imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
 		self.programPdf = try container.decodeIfPresent(String.self, forKey: .programPdf)
-		self.seminarPdf = try container.decodeIfPresent(String.self, forKey: .seminarPdf)
+		self.dtProgramPdf = try container.decodeIfPresent(Int.self, forKey: .dtProgramPdf)
 		self.priceUrl = try container.decodeIfPresent(String.self, forKey: .priceUrl)
 		self.placeUrl = try container.decodeIfPresent(String.self, forKey: .placeUrl)
 		self.hotelsUrl = try container.decodeIfPresent(String.self, forKey: .hotelsUrl)
