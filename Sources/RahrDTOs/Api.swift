@@ -27,11 +27,18 @@ public enum Api {
 	/// Корневая точка доступа к работе с профилями
 	public static let profile = "profile"
 	
+	/// Корневая точка доступа к работе с сертификатами
+	public static let certificates = "certificates"
+	
+	// MARK: - V1
+	
 	/// Первая версия точек доступа
 	public enum V1 {
 		public static let entryPoint = "v1"
 		
 		public static let path = Api.path + "/" + entryPoint
+		
+		// MARK: - User
 		
 		public enum User {
 			public static let path = V1.path + "/" + Api.user
@@ -66,6 +73,8 @@ public enum Api {
 			}
 		}
 		
+		// MARK: - News
+		
 		/// Работа с новостями
 		public enum News {
 			public static let path = V1.path + "/" + Api.news
@@ -95,6 +104,8 @@ public enum Api {
 			}
 		}
 		
+		// MARK: - Conference
+		
 		/// Работа с конференциями
 		public enum Conference {
 			public static let path = V1.path + "/" + Api.conferences
@@ -123,6 +134,8 @@ public enum Api {
 				return url.replacingOccurrences(of: ":id", with: id)
 			}
 		}
+		
+		// MARK: - Profile
 		
 		/// Работа с профилями
 		public enum Profile {
@@ -160,6 +173,37 @@ public enum Api {
 				case .byRahrId:
 					return url.replacingOccurrences(of: ":rahrId", with: id)
 				}
+			}
+		}
+		
+		// MARK: - Certificate
+		
+		/// Работа с сертификатами
+		public enum Certificate {
+			public static let path = V1.path + "/" + Api.certificates
+			
+			/// Получить список сертификатов
+			case list
+			
+			/// Получить, создать, обновить или удалить сертификат по ID
+			case byId
+			
+			public var uri: String {
+				switch self {
+				case .list:
+					""
+				case .byId:
+					":id"
+				}
+			}
+			
+			public func getUrl() -> String {
+				return uri.isEmpty ? Self.path : Self.path + "/" + uri
+			}
+			
+			public func getUrlWithId(_ id: String) -> String {
+				let url = Self.path + "/" + uri
+				return url.replacingOccurrences(of: ":id", with: id)
 			}
 		}
 	}
