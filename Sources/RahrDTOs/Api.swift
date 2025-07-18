@@ -150,6 +150,9 @@ public enum Api {
 			/// Обновить профиль члена РАРЧ по ID
 			case update
 			
+			/// История платежей члена РАРЧ по ID
+			case paymentHistory
+			
 			public var uri: String {
 				switch self {
 				case .byMemberId:
@@ -158,6 +161,8 @@ public enum Api {
 					"rahr/:rahrId"
 				case .update:
 					":memberId"
+				case .paymentHistory:
+					":memberId/history"
 				}
 			}
 			
@@ -168,7 +173,7 @@ public enum Api {
 			public func getUrlWithId(_ id: String) -> String {
 				let url = Self.path + "/" + uri
 				switch self {
-				case .byMemberId, .update:
+				case .byMemberId, .update, .paymentHistory:
 					return url.replacingOccurrences(of: ":memberId", with: id)
 				case .byRahrId:
 					return url.replacingOccurrences(of: ":rahrId", with: id)
