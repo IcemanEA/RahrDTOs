@@ -116,12 +116,27 @@ public enum Api {
 			/// Получить, создать, обновить или удалить конференцию по ID
 			case byId
 			
+			/// Получить список семинаров конференции
+			case items
+			
+			/// Получить конкретный семинар по conferenceID
+			case itemById
+			
+			/// Получить список семинаров конференции с информацией о регистрации пользователя
+			case registrationMemberId
+			
 			public var uri: String {
 				switch self {
 				case .list:
 					""
 				case .byId:
 					":id"
+				case .items:
+					"items"
+				case .itemById:
+					":id/items"
+				case .registrationMemberId:
+					":id/registration/:memberId"
 				}
 			}
 			
@@ -132,6 +147,13 @@ public enum Api {
 			public func getUrlWithId(_ id: String) -> String {
 				let url = Self.path + "/" + uri
 				return url.replacingOccurrences(of: ":id", with: id)
+			}
+			
+			public func getUrlWithMemberIds(conferenceId: String, memberId: String) -> String {
+				let url = Self.path + "/" + uri
+				return url
+					.replacingOccurrences(of: ":id", with: conferenceId)
+					.replacingOccurrences(of: ":memberId", with: memberId)
 			}
 		}
 		

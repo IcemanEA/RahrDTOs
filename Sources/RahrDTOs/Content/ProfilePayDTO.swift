@@ -1,5 +1,5 @@
 //
-//  ProfilePaysDTO.swift
+//  ProfilePayDTO.swift
 //  RahrDTOs
 //
 //  Created by System on 18.07.2025.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// Модель для передачи данных о платежах членов РАРЧ между приложениями и сервисами
-public struct ProfilePaysDTO: Codable, Sendable {
+public struct ProfilePayDTO: Codable, Sendable {
 	public let id: UUID?
 	public let memberId: UUID?
 	public let dtPay: Int?
