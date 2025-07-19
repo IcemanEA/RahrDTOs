@@ -11,6 +11,8 @@ import Foundation
 public struct ConferenceMemberDTO: Codable, Sendable {
 	public let id: UUID?
 	public let itemId: UUID?
+	public let profileId: UUID?
+	public let rahrId: Int?
 	public let dtReg: Int?
 	public let speakerIs: Bool?
 	public let yongIs: Bool?
@@ -35,6 +37,8 @@ public struct ConferenceMemberDTO: Codable, Sendable {
 	public enum CodingKeys: String, CodingKey {
 		case id
 		case itemId = "item_id"
+		case profileId = "profile_id"
+		case rahrId = "rahr_id"
 		case dtReg = "dt_reg"
 		case speakerIs = "speaker_is"
 		case yongIs = "yong_is"
@@ -60,6 +64,8 @@ public struct ConferenceMemberDTO: Codable, Sendable {
 	public init(
 		id: UUID? = nil,
 		itemId: UUID? = nil,
+		profileId: UUID? = nil,
+		rahrId: Int? = nil,
 		dtReg: Int? = nil,
 		speakerIs: Bool? = nil,
 		yongIs: Bool? = nil,
@@ -83,6 +89,8 @@ public struct ConferenceMemberDTO: Codable, Sendable {
 	) {
 		self.id = id
 		self.itemId = itemId
+		self.profileId = profileId
+		self.rahrId = rahrId
 		self.dtReg = dtReg
 		self.speakerIs = speakerIs
 		self.yongIs = yongIs
@@ -109,6 +117,8 @@ public struct ConferenceMemberDTO: Codable, Sendable {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		self.id = try container.decodeIfPresent(UUID.self, forKey: .id)
 		self.itemId = try container.decodeIfPresent(UUID.self, forKey: .itemId)
+		self.profileId = try container.decodeIfPresent(UUID.self, forKey: .profileId)
+		self.rahrId = try container.decodeIfPresent(Int.self, forKey: .rahrId)
 		self.dtReg = try container.decodeIfPresent(Int.self, forKey: .dtReg)
 		self.speakerIs = try container.decodeIfPresent(Bool.self, forKey: .speakerIs)
 		self.yongIs = try container.decodeIfPresent(Bool.self, forKey: .yongIs)

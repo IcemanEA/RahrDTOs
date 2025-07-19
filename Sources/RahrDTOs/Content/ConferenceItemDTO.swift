@@ -11,6 +11,7 @@ import Foundation
 public struct ConferenceItemDTO: Codable, Sendable {
 	public let id: UUID?
 	public let conferenceId: UUID?
+	public let rahrId: Int?
 	public let sortId: Int?
 	public let typeItemId: String?
 	public let shortname: String?
@@ -26,6 +27,7 @@ public struct ConferenceItemDTO: Codable, Sendable {
 	public enum CodingKeys: String, CodingKey {
 		case id
 		case conferenceId = "conference_id"
+		case rahrId = "rahr_id"
 		case sortId = "sort_id"
 		case typeItemId = "type_item_id"
 		case shortname
@@ -42,6 +44,7 @@ public struct ConferenceItemDTO: Codable, Sendable {
 	public init(
 		id: UUID? = nil,
 		conferenceId: UUID? = nil,
+		rahrId: Int? = nil,
 		sortId: Int? = nil,
 		typeItemId: String? = nil,
 		shortname: String? = nil,
@@ -56,6 +59,7 @@ public struct ConferenceItemDTO: Codable, Sendable {
 	) {
 		self.id = id
 		self.conferenceId = conferenceId
+		self.rahrId = rahrId
 		self.sortId = sortId
 		self.typeItemId = typeItemId
 		self.shortname = shortname
@@ -73,6 +77,7 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		self.id = try container.decodeIfPresent(UUID.self, forKey: .id)
 		self.conferenceId = try container.decodeIfPresent(UUID.self, forKey: .conferenceId)
+		self.rahrId = try container.decodeIfPresent(Int.self, forKey: .rahrId)
 		self.sortId = try container.decodeIfPresent(Int.self, forKey: .sortId)
 		self.typeItemId = try container.decodeIfPresent(String.self, forKey: .typeItemId)
 		self.shortname = try container.decodeIfPresent(String.self, forKey: .shortname)
