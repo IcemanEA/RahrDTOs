@@ -30,6 +30,9 @@ public enum Api {
 	/// Корневая точка доступа к работе с сертификатами
 	public static let certificates = "certificates"
 	
+	/// Корневая точка доступа к работе с поддержкой
+	 public static let support = "support"
+	
 	// MARK: - V1
 	
 	/// Первая версия точек доступа
@@ -231,6 +234,56 @@ public enum Api {
 			public func getUrlWithId(_ id: String) -> String {
 				let url = Self.path + "/" + uri
 				return url.replacingOccurrences(of: ":id", with: id)
+			}
+		}
+		
+		// MARK: - Support
+		
+		/// Работа с системой поддержки
+		public enum Support {
+			public static let path = V1.path + "/" + Api.support
+			
+			/// Получить/Отправить сообщения от поддержки для пользователя
+			case messages
+			
+			/// Пометить сообщение как прочитанное
+			case markAsRead
+			
+			/// Получить список пользователей с непрочитанными сообщениями (админ)
+			case adminMessages
+			
+			/// Получить все сообщения конкретного пользователя (админ)
+			/// или отправить сообщение конкретному пользователю
+			case adminMessagesByMemberId
+			
+			public var uri: String {
+				switch self {
+				case .messages:
+					"messages/:memberId"
+				case .markAsRead:
+					"messages/read/:id"
+				case .adminMessages:
+					"admin/messages"
+				case .adminMessagesByMemberId:
+					"admin/messages/:memberId"
+				}
+			}
+			
+			public func getUrl() -> String {
+				return Self.path + "/" + uri
+			}
+			
+			public func getUrlWithId(_ id: String) -> String {
+				let url = Self.path + "/" + uri
+				
+				switch self {
+				case .adminMessagesByMemberId:
+					return url.replacingOccurrences(of: ":memberId", with: id)
+				case .markAsRead:
+					return url.replacingOccurrences(of: ":id", with: id)
+				default:
+					return url
+				}
 			}
 		}
 	}

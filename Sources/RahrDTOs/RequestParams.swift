@@ -30,6 +30,26 @@ public struct RequestParams: Sendable {
 		self.count = count
 		self.total = total
 	}
+	
+	/// Создать RequestParams из query параметров
+	public init(from queryParameters: [String: String]) throws {
+		let limit = queryParameters["limit"].flatMap(Int.init)
+		let offset = queryParameters["offset"].flatMap(Int.init)
+		let count = queryParameters["count"].flatMap(Int.init)
+		
+		self.init(limit: limit, offset: offset, count: count)
+	}
+	
+	/// Создать новый RequestParams с указанным количеством
+	public func withCount(_ count: Int) -> RequestParams {
+		RequestParams(
+			update: self.update,
+			limit: self.limit,
+			offset: self.offset,
+			count: count,
+			total: self.total
+		)
+	}
 }
 
 extension RequestParams: CustomStringConvertible {

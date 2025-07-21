@@ -10,7 +10,7 @@ import Foundation
 /// Модель для передачи данных о платежах членов РАРЧ между приложениями и сервисами
 public struct ProfilePayDTO: Codable, Sendable {
 	public let id: UUID?
-	public let memberId: UUID?
+	public let profileId: UUID?
 	public let dtPay: Int?
 	public let yearPay: Int?
 	public let typePayId: Int?
@@ -19,7 +19,7 @@ public struct ProfilePayDTO: Codable, Sendable {
 	
 	public enum CodingKeys: String, CodingKey {
 		case id
-		case memberId = "member_id"
+		case profileId = "profile_id"
 		case dtPay = "dt_pay"
 		case yearPay = "year_pay"
 		case typePayId = "type_pay_id"
@@ -29,7 +29,7 @@ public struct ProfilePayDTO: Codable, Sendable {
 	
 	public init(
 		id: UUID? = nil,
-		memberId: UUID? = nil,
+		profileId: UUID? = nil,
 		dtPay: Int? = nil,
 		yearPay: Int? = nil,
 		typePayId: Int? = nil,
@@ -37,7 +37,7 @@ public struct ProfilePayDTO: Codable, Sendable {
 		rahrRegionId: Int? = nil
 	) {
 		self.id = id
-		self.memberId = memberId
+		self.profileId = profileId
 		self.dtPay = dtPay
 		self.yearPay = yearPay
 		self.typePayId = typePayId
@@ -48,7 +48,7 @@ public struct ProfilePayDTO: Codable, Sendable {
 	public init(from decoder: any Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		self.id = try container.decodeIfPresent(UUID.self, forKey: .id)
-		self.memberId = try container.decodeIfPresent(UUID.self, forKey: .memberId)
+		self.profileId = try container.decodeIfPresent(UUID.self, forKey: .profileId)
 		self.dtPay = try container.decodeIfPresent(Int.self, forKey: .dtPay)
 		self.yearPay = try container.decodeIfPresent(Int.self, forKey: .yearPay)
 		self.typePayId = try container.decodeIfPresent(Int.self, forKey: .typePayId)
