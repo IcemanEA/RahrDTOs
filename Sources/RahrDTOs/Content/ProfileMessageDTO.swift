@@ -14,6 +14,7 @@ public struct ProfileMessageDTO: Codable, Sendable {
 	public let adminId: UUID?
 	public let dtCreate: Int?
 	public let dtRead: Int?
+	public let messageType: String?
 	public let messageText: String?
 	public let documentUrl: String?
 	
@@ -23,6 +24,7 @@ public struct ProfileMessageDTO: Codable, Sendable {
 		case adminId = "admin_id"
 		case dtCreate = "dt_create"
 		case dtRead = "dt_read"
+		case messageType = "message_type"
 		case messageText = "message_text"
 		case documentUrl = "document_url"
 	}
@@ -33,6 +35,7 @@ public struct ProfileMessageDTO: Codable, Sendable {
 		adminId: UUID? = nil,
 		dtCreate: Int? = nil,
 		dtRead: Int? = nil,
+		messageType: String? = nil,
 		messageText: String? = nil,
 		documentUrl: String? = nil
 	) {
@@ -41,6 +44,7 @@ public struct ProfileMessageDTO: Codable, Sendable {
 		self.adminId = adminId
 		self.dtCreate = dtCreate
 		self.dtRead = dtRead
+		self.messageType = messageType
 		self.messageText = messageText
 		self.documentUrl = documentUrl
 	}
@@ -52,6 +56,7 @@ public struct ProfileMessageDTO: Codable, Sendable {
 		self.adminId = try container.decodeIfPresent(UUID.self, forKey: .adminId)
 		self.dtCreate = try container.decodeIfPresent(Int.self, forKey: .dtCreate)
 		self.dtRead = try container.decodeIfPresent(Int.self, forKey: .dtRead)
+		self.messageType = try container.decodeIfPresent(String.self, forKey: .messageType)
 		self.messageText = try container.decodeIfPresent(String.self, forKey: .messageText)
 		self.documentUrl = try container.decodeIfPresent(String.self, forKey: .documentUrl)
 	}
