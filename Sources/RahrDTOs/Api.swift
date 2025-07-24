@@ -243,6 +243,9 @@ public enum Api {
 		public enum Support {
 			public static let path = V1.path + "/" + Api.support
 			
+			/// Получить одно сообщени от поддержки для пользователя
+			case message
+			
 			/// Получить/Отправить сообщения от поддержки для пользователя
 			case messages
 			
@@ -258,6 +261,8 @@ public enum Api {
 			
 			public var uri: String {
 				switch self {
+				case .message:
+					"message/:id"
 				case .messages:
 					"messages/:memberId"
 				case .markAsRead:
@@ -277,9 +282,9 @@ public enum Api {
 				let url = Self.path + "/" + uri
 				
 				switch self {
-				case .adminMessagesByMemberId:
+				case .messages, .adminMessagesByMemberId:
 					return url.replacingOccurrences(of: ":memberId", with: id)
-				case .markAsRead:
+				case .message, .markAsRead:
 					return url.replacingOccurrences(of: ":id", with: id)
 				default:
 					return url
