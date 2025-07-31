@@ -33,6 +33,9 @@ public enum Api {
 	/// Корневая точка доступа к работе с поддержкой
 	 public static let support = "support"
 	
+	/// Корневая точка доступа к работе с файлами
+	public static let files = "files"
+	
 	// MARK: - V1
 	
 	/// Первая версия точек доступа
@@ -289,6 +292,42 @@ public enum Api {
 				default:
 					return url
 				}
+			}
+		}
+		
+		// MARK: - Files
+		
+		/// Работа с файлами
+		public enum Files {
+			public static let path = V1.path + "/" + Api.files
+			
+			/// Получить presigned URL для загрузки
+			case uploadUrl
+			
+			/// Подтвердить загрузку файла
+			case complete
+			
+			/// Получить информацию о файле по ID или удалить файл
+			case byId
+			
+			public var uri: String {
+				switch self {
+				case .uploadUrl:
+					"upload-url"
+				case .complete:
+					"complete"
+				case .byId:
+					":id"
+				}
+			}
+			
+			public func getUrl() -> String {
+				return uri.isEmpty ? Self.path : Self.path + "/" + uri
+			}
+			
+			public func getUrlWithId(_ id: String) -> String {
+				let url = Self.path + "/" + uri
+				return url.replacingOccurrences(of: ":id", with: id)
 			}
 		}
 	}
