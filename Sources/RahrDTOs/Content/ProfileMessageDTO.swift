@@ -17,6 +17,7 @@ public struct ProfileMessageDTO: Codable, Sendable {
 	public let messageType: String?
 	public let messageText: String?
 	public let documentUrl: String?
+	public let documentId: UUID?
 	
 	public enum CodingKeys: String, CodingKey {
 		case id
@@ -27,6 +28,7 @@ public struct ProfileMessageDTO: Codable, Sendable {
 		case messageType = "message_type"
 		case messageText = "message_text"
 		case documentUrl = "document_url"
+		case documentId = "document_id"
 	}
 	
 	public init(
@@ -37,7 +39,8 @@ public struct ProfileMessageDTO: Codable, Sendable {
 		dtRead: Int? = nil,
 		messageType: String? = nil,
 		messageText: String? = nil,
-		documentUrl: String? = nil
+		documentUrl: String? = nil,
+		documentId: UUID? = nil
 	) {
 		self.id = id
 		self.profileId = profileId
@@ -47,6 +50,7 @@ public struct ProfileMessageDTO: Codable, Sendable {
 		self.messageType = messageType
 		self.messageText = messageText
 		self.documentUrl = documentUrl
+		self.documentId = documentId
 	}
 	
 	public init(from decoder: any Decoder) throws {
@@ -59,5 +63,6 @@ public struct ProfileMessageDTO: Codable, Sendable {
 		self.messageType = try container.decodeIfPresent(String.self, forKey: .messageType)
 		self.messageText = try container.decodeIfPresent(String.self, forKey: .messageText)
 		self.documentUrl = try container.decodeIfPresent(String.self, forKey: .documentUrl)
+		self.documentId = try container.decodeIfPresent(UUID.self, forKey: .documentId)
 	}
 }
