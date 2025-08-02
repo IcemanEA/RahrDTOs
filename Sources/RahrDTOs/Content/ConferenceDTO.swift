@@ -13,6 +13,7 @@ public struct ConferenceDTO: Codable, Sendable {
 	public let dtCreate: Int?
 	public let dtUpdate: Int?
 	public let state: String?
+	public let rahrId: Int?
 	public let shortname: String?
 	public let fullname: String?
 	public let maincity: String?
@@ -31,12 +32,17 @@ public struct ConferenceDTO: Codable, Sendable {
 	public let reportUrl: String?
 	public let scienceUrl: String?
 	public let thesesUrl: String?
+	public let charityUrl: String?
+	public let dinnerUrl: String?
+	public let onlineStreamUrl: String?
+	public let registryUrl: String?
 	
 	public enum CodingKeys: String, CodingKey {
 		case id
 		case dtCreate = "dt_create"
 		case dtUpdate = "dt_update"
 		case state
+		case rahrId = "rahr_id"
 		case shortname
 		case fullname
 		case maincity
@@ -55,6 +61,10 @@ public struct ConferenceDTO: Codable, Sendable {
 		case reportUrl = "report_url"
 		case scienceUrl = "science_url"
 		case thesesUrl = "theses_url"
+		case charityUrl = "charity_url"
+		case dinnerUrl = "dinner_url"
+		case onlineStreamUrl = "online_stream_url"
+		case registryUrl = "registry_url"
 	}
 	
 	public init(
@@ -62,6 +72,7 @@ public struct ConferenceDTO: Codable, Sendable {
 		dtCreate: Int? = nil,
 		dtUpdate: Int? = nil,
 		state: String? = nil,
+		rahrId: Int? = nil,
 		shortname: String? = nil,
 		fullname: String? = nil,
 		maincity: String? = nil,
@@ -79,12 +90,17 @@ public struct ConferenceDTO: Codable, Sendable {
 		photoUrl: String? = nil,
 		reportUrl: String? = nil,
 		scienceUrl: String? = nil,
-		thesesUrl: String? = nil
+		thesesUrl: String? = nil,
+		charityUrl: String? = nil,
+		dinnerUrl: String? = nil,
+		onlineStreamUrl: String? = nil,
+		registryUrl: String? = nil
 	) {
 		self.id = id
 		self.dtCreate = dtCreate
 		self.dtUpdate = dtUpdate
 		self.state = state
+		self.rahrId = rahrId
 		self.shortname = shortname
 		self.fullname = fullname
 		self.maincity = maincity
@@ -103,6 +119,10 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.reportUrl = reportUrl
 		self.scienceUrl = scienceUrl
 		self.thesesUrl = thesesUrl
+		self.charityUrl = charityUrl
+		self.dinnerUrl = dinnerUrl
+		self.onlineStreamUrl = onlineStreamUrl
+		self.registryUrl = registryUrl
 	}
 	
 	public init(from decoder: any Decoder) throws {
@@ -111,6 +131,7 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.dtCreate = try container.decodeIfPresent(Int.self, forKey: .dtCreate)
 		self.dtUpdate = try container.decodeIfPresent(Int.self, forKey: .dtUpdate)
 		self.state = try container.decodeIfPresent(String.self, forKey: .state)
+		self.rahrId = try container.decodeIfPresent(Int.self, forKey: .rahrId)
 		self.shortname = try container.decodeIfPresent(String.self, forKey: .shortname)
 		self.fullname = try container.decodeIfPresent(String.self, forKey: .fullname)
 		self.maincity = try container.decodeIfPresent(String.self, forKey: .maincity)
@@ -129,5 +150,9 @@ public struct ConferenceDTO: Codable, Sendable {
 		self.reportUrl = try container.decodeIfPresent(String.self, forKey: .reportUrl)
 		self.scienceUrl = try container.decodeIfPresent(String.self, forKey: .scienceUrl)
 		self.thesesUrl = try container.decodeIfPresent(String.self, forKey: .thesesUrl)
+		self.charityUrl = try container.decodeIfPresent(String.self, forKey: .charityUrl)
+		self.dinnerUrl = try container.decodeIfPresent(String.self, forKey: .dinnerUrl)
+		self.onlineStreamUrl = try container.decodeIfPresent(String.self, forKey: .onlineStreamUrl)
+		self.registryUrl = try container.decodeIfPresent(String.self, forKey: .registryUrl)
 	}
 }

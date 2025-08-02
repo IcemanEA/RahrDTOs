@@ -23,6 +23,11 @@ public struct ConferenceItemDTO: Codable, Sendable {
 	public let duration: Int?
 	public let nmoname: String?
 	public let nmocount: Int?
+	public let recordsUrl: String?
+	public let recordsCode: String?
+	public let seminarProgUrl: String?
+	public let roomName: String?
+	public let roomColor: String?
 	
 	public enum CodingKeys: String, CodingKey {
 		case id
@@ -39,6 +44,11 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		case duration
 		case nmoname
 		case nmocount
+		case recordsUrl = "records_url"
+		case recordsCode = "records_code"
+		case seminarProgUrl = "seminar_prog_url"
+		case roomName = "room_name"
+		case roomColor = "room_color"
 	}
 	
 	public init(
@@ -55,7 +65,12 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		dtBegin: Int? = nil,
 		duration: Int? = nil,
 		nmoname: String? = nil,
-		nmocount: Int? = nil
+		nmocount: Int? = nil,
+		recordsUrl: String? = nil,
+		recordsCode: String? = nil,
+		seminarProgUrl: String? = nil,
+		roomName: String? = nil,
+		roomColor: String? = nil
 	) {
 		self.id = id
 		self.conferenceId = conferenceId
@@ -71,6 +86,11 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		self.duration = duration
 		self.nmoname = nmoname
 		self.nmocount = nmocount
+		self.recordsUrl = recordsUrl
+		self.recordsCode = recordsCode
+		self.seminarProgUrl = seminarProgUrl
+		self.roomName = roomName
+		self.roomColor = roomColor
 	}
 
 	public init(from decoder: any Decoder) throws {
@@ -89,5 +109,10 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		self.duration = try container.decodeIfPresent(Int.self, forKey: .duration)
 		self.nmoname = try container.decodeIfPresent(String.self, forKey: .nmoname)
 		self.nmocount = try container.decodeIfPresent(Int.self, forKey: .nmocount)
+		self.recordsUrl = try container.decodeIfPresent(String.self, forKey: .recordsUrl)
+		self.recordsCode = try container.decodeIfPresent(String.self, forKey: .recordsCode)
+		self.seminarProgUrl = try container.decodeIfPresent(String.self, forKey: .seminarProgUrl)
+		self.roomName = try container.decodeIfPresent(String.self, forKey: .roomName)
+		self.roomColor = try container.decodeIfPresent(String.self, forKey: .roomColor)
 	}
 }
