@@ -28,6 +28,8 @@ public struct ConferenceItemDTO: Codable, Sendable {
 	public let seminarProgUrl: String?
 	public let roomName: String?
 	public let roomColor: String?
+	public let dtSeminarProg: Int?
+	public let dtUpdate: Int?
 	
 	public enum CodingKeys: String, CodingKey {
 		case id
@@ -49,6 +51,8 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		case seminarProgUrl = "seminar_prog_url"
 		case roomName = "room_name"
 		case roomColor = "room_color"
+		case dtSeminarProg = "dt_seminar_prog"
+		case dtUpdate = "dt_update"
 	}
 	
 	public init(
@@ -70,7 +74,9 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		recordsCode: String? = nil,
 		seminarProgUrl: String? = nil,
 		roomName: String? = nil,
-		roomColor: String? = nil
+		roomColor: String? = nil,
+		dtSeminarProg: Int? = nil,
+		dtUpdate: Int? = nil
 	) {
 		self.id = id
 		self.conferenceId = conferenceId
@@ -91,6 +97,8 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		self.seminarProgUrl = seminarProgUrl
 		self.roomName = roomName
 		self.roomColor = roomColor
+		self.dtSeminarProg = dtSeminarProg
+		self.dtUpdate = dtUpdate
 	}
 
 	public init(from decoder: any Decoder) throws {
@@ -114,5 +122,7 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		self.seminarProgUrl = try container.decodeIfPresent(String.self, forKey: .seminarProgUrl)
 		self.roomName = try container.decodeIfPresent(String.self, forKey: .roomName)
 		self.roomColor = try container.decodeIfPresent(String.self, forKey: .roomColor)
+		self.dtSeminarProg = try container.decodeIfPresent(Int.self, forKey: .dtSeminarProg)
+		self.dtUpdate = try container.decodeIfPresent(Int.self, forKey: .dtUpdate)
 	}
 }
