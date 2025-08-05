@@ -15,6 +15,9 @@ public enum Api {
 	/// Корневая точка доступа к API
 	public static let path = "/" + entryPoint
 	
+	/// Корневая точка доступа к административным функциям
+	public static let admin = "admin"
+	
 	/// Корневая точка доступа работе с авторизацией пользователя
 	public static let user = "user"
 	
@@ -43,6 +46,37 @@ public enum Api {
 		public static let entryPoint = "v1"
 		
 		public static let path = Api.path + "/" + entryPoint
+		
+		// MARK: - Admin
+		
+		/// Административные функции
+		public enum Admin {
+			public static let path = V1.path + "/" + Api.admin
+			
+			/// Получить активные настройки приложения
+			case appSettings
+			
+			/// Управление настройками приложения по ID
+			case appSettingsById
+			
+			public var uri: String {
+				switch self {
+				case .appSettings:
+					"app-settings"
+				case .appSettingsById:
+					"app-settings/:id"
+				}
+			}
+			
+			public func getUrl() -> String {
+				return uri.isEmpty ? Self.path : Self.path + "/" + uri
+			}
+			
+			public func getUrlWithId(_ id: String) -> String {
+				let url = Self.path + "/" + uri
+				return url.replacingOccurrences(of: ":id", with: id)
+			}
+		}
 		
 		// MARK: - User
 		
