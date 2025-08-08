@@ -15,10 +15,7 @@ public struct CertificateDTO: Codable, Sendable {
 	public let activeIs: Bool?
 	public let fullname: String?
 	public let imageUrl: String?
-	public let positionX: Int?
-	public let positionY: Int?
-	public let fontSize: Int?
-	public let fontName: String?
+	public let fieldsConfiguration: String?
 	
 	public enum CodingKeys: String, CodingKey {
 		case id
@@ -27,10 +24,7 @@ public struct CertificateDTO: Codable, Sendable {
 		case activeIs = "active_is"
 		case fullname
 		case imageUrl = "image_url"
-		case positionX = "position_x"
-		case positionY = "position_y"
-		case fontSize = "font_size"
-		case fontName = "font_name"
+		case fieldsConfiguration = "fields_configuration"
 	}
 	
 	public init(
@@ -40,10 +34,7 @@ public struct CertificateDTO: Codable, Sendable {
 		activeIs: Bool? = nil,
 		fullname: String? = nil,
 		imageUrl: String? = nil,
-		positionX: Int? = nil,
-		positionY: Int? = nil,
-		fontSize: Int? = nil,
-		fontName: String? = nil
+		fieldsConfiguration: String? = nil,
 	) {
 		self.id = id
 		self.dtCreate = dtCreate
@@ -51,10 +42,7 @@ public struct CertificateDTO: Codable, Sendable {
 		self.activeIs = activeIs
 		self.fullname = fullname
 		self.imageUrl = imageUrl
-		self.positionX = positionX
-		self.positionY = positionY
-		self.fontSize = fontSize
-		self.fontName = fontName
+		self.fieldsConfiguration = fieldsConfiguration
 	}
 	
 	public init(from decoder: any Decoder) throws {
@@ -65,9 +53,6 @@ public struct CertificateDTO: Codable, Sendable {
 		self.activeIs = try container.decodeIfPresent(Bool.self, forKey: .activeIs)
 		self.fullname = try container.decodeIfPresent(String.self, forKey: .fullname)
 		self.imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
-		self.positionX = try container.decodeIfPresent(Int.self, forKey: .positionX)
-		self.positionY = try container.decodeIfPresent(Int.self, forKey: .positionY)
-		self.fontSize = try container.decodeIfPresent(Int.self, forKey: .fontSize)
-		self.fontName = try container.decodeIfPresent(String.self, forKey: .fontName)
+		self.fieldsConfiguration = try container.decodeIfPresent(String.self, forKey: .fieldsConfiguration)
 	}
 }
