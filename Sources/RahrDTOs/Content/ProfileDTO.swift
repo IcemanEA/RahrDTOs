@@ -37,6 +37,9 @@ public struct ProfileDTO: Codable, Sendable {
 	public let email: String?
 	public let adminIs: Int?
 	
+	/// Персонализированная ссылка для оплаты членского взноса
+	public let paymentUrl: String?
+	
 	public enum CodingKeys: String, CodingKey {
 		case id
 		case rahrId = "rahr_id"
@@ -60,6 +63,7 @@ public struct ProfileDTO: Codable, Sendable {
 		case mobilePhone = "mobile_phone"
 		case email
 		case adminIs = "admin_is"
+		case paymentUrl = "payment_url"
 	}
 	
 	public init(
@@ -84,7 +88,8 @@ public struct ProfileDTO: Codable, Sendable {
 		orgPost: String? = nil,
 		mobilePhone: String? = nil,
 		email: String? = nil,
-		adminIs: Int? = nil
+		adminIs: Int? = nil,
+		paymentUrl: String? = nil
 	) {
 		self.id = id
 		self.rahrId = rahrId
@@ -108,6 +113,7 @@ public struct ProfileDTO: Codable, Sendable {
 		self.mobilePhone = mobilePhone
 		self.email = email
 		self.adminIs = adminIs
+		self.paymentUrl = paymentUrl
 	}
 
 	public init(from decoder: any Decoder) throws {
@@ -134,6 +140,7 @@ public struct ProfileDTO: Codable, Sendable {
 		self.mobilePhone = try container.decodeIfPresent(String.self, forKey: .mobilePhone)
 		self.email = try container.decodeIfPresent(String.self, forKey: .email)
 		self.adminIs = try container.decodeIfPresent(Int.self, forKey: .adminIs)
+		self.paymentUrl = try container.decodeIfPresent(String.self, forKey: .paymentUrl)
 	}
 }
 
