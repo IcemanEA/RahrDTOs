@@ -17,6 +17,8 @@ public struct AppSettingsDTO: Codable, Sendable {
 	public let currentVersion: String?
 	public let minSupportedVersion: String?
 	public let membershipPaymentUrl: String?
+	public let registrationWebsiteUrl: String?
+	public let passwordRecoveryUrl: String?
 	public let forceUpdate: Bool?
 	public let maintenanceMode: Bool?
 	public let activeIs: Bool?
@@ -28,6 +30,8 @@ public struct AppSettingsDTO: Codable, Sendable {
 		case currentVersion = "current_version"
 		case minSupportedVersion = "min_supported_version"
 		case membershipPaymentUrl = "membership_payment_url"
+		case registrationWebsiteUrl = "registration_website_url"
+		case passwordRecoveryUrl = "password_recovery_url"
 		case forceUpdate = "force_update"
 		case maintenanceMode = "maintenance_mode"
 		case activeIs = "active_is"
@@ -40,6 +44,8 @@ public struct AppSettingsDTO: Codable, Sendable {
 		currentVersion: String? = nil,
 		minSupportedVersion: String? = nil,
 		membershipPaymentUrl: String? = nil,
+		registrationWebsiteUrl: String? = nil,
+		passwordRecoveryUrl: String? = nil,
 		forceUpdate: Bool? = nil,
 		maintenanceMode: Bool? = nil,
 		activeIs: Bool? = nil
@@ -50,6 +56,8 @@ public struct AppSettingsDTO: Codable, Sendable {
 		self.currentVersion = currentVersion
 		self.minSupportedVersion = minSupportedVersion
 		self.membershipPaymentUrl = membershipPaymentUrl
+		self.registrationWebsiteUrl = registrationWebsiteUrl
+		self.passwordRecoveryUrl = passwordRecoveryUrl
 		self.forceUpdate = forceUpdate
 		self.maintenanceMode = maintenanceMode
 		self.activeIs = activeIs
@@ -63,6 +71,8 @@ public struct AppSettingsDTO: Codable, Sendable {
 		self.currentVersion = try container.decodeIfPresent(String.self, forKey: .currentVersion)
 		self.minSupportedVersion = try container.decodeIfPresent(String.self, forKey: .minSupportedVersion)
 		self.membershipPaymentUrl = try container.decodeIfPresent(String.self, forKey: .membershipPaymentUrl)
+		self.registrationWebsiteUrl = try container.decodeIfPresent(String.self, forKey: .registrationWebsiteUrl)
+		self.passwordRecoveryUrl = try container.decodeIfPresent(String.self, forKey: .passwordRecoveryUrl)
 		self.forceUpdate = try container.decodeIfPresent(Bool.self, forKey: .forceUpdate)
 		self.maintenanceMode = try container.decodeIfPresent(Bool.self, forKey: .maintenanceMode)
 		self.activeIs = try container.decodeIfPresent(Bool.self, forKey: .activeIs)
