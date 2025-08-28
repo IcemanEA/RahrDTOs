@@ -15,6 +15,12 @@ public enum Api {
 	/// Корневая точка доступа к API
 	public static let path = "/" + entryPoint
 	
+	/// Health monitoring endpoints
+	static let health = "health"
+	
+	/// Metrics endpoint for Prometheus
+	static let metrics = "metrics"
+	
 	/// Корневая точка доступа к административным функциям
 	public static let admin = "admin"
 	
@@ -165,6 +171,12 @@ public enum Api {
 			/// Получить список семинаров конференции с информацией о регистрации пользователя
 			case registrationMemberId
 			
+			/// Получить программу основной конференции
+			case program
+			
+			/// Получить программу конкретного семинара конференции
+			case programByItemId
+			
 			public var uri: String {
 				switch self {
 				case .list:
@@ -177,6 +189,10 @@ public enum Api {
 					":id/items"
 				case .registrationMemberId:
 					":id/registration/:memberId"
+				case .program:
+					":id/program"
+				case .programByItemId:
+					"program/:itemId"
 				}
 			}
 			
@@ -187,6 +203,11 @@ public enum Api {
 			public func getUrlWithId(_ id: String) -> String {
 				let url = Self.path + "/" + uri
 				return url.replacingOccurrences(of: ":id", with: id)
+			}
+			
+			public func getUrlWithItemId(_ itemId: String) -> String {
+				let url = Self.path + "/" + uri
+				return url.replacingOccurrences(of: ":itemId", with: itemId)
 			}
 			
 			public func getUrlWithMemberIds(conferenceId: String, memberId: String) -> String {
