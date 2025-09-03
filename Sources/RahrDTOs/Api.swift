@@ -224,6 +224,9 @@ public enum Api {
 		public enum Profile {
 			public static let path = V1.path + "/" + Api.profile
 			
+			/// Массовая загрузка профилей
+			case bulkCreate
+			
 			/// Получить профиль члена РАРЧ по ID
 			case byMemberId
 			
@@ -238,6 +241,8 @@ public enum Api {
 			
 			public var uri: String {
 				switch self {
+				case .bulkCreate:
+					""
 				case .byMemberId:
 					":memberId"
 				case .byRahrId:
@@ -260,6 +265,8 @@ public enum Api {
 					return url.replacingOccurrences(of: ":memberId", with: id)
 				case .byRahrId:
 					return url.replacingOccurrences(of: ":rahrId", with: id)
+				case .bulkCreate:
+					fatalError(#function + ": unexpected case")
 				}
 			}
 		}
