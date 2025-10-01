@@ -30,6 +30,9 @@ public enum Api {
 	/// Корневая точка доступа к работе с новостями
 	public static let news = "news"
 	
+	/// Корневая точка доступа к работе с событиями
+	public static let events = "events"
+	
 	/// Корневая точка доступа к работе с конференциями
 	public static let conferences = "conferences"
 	
@@ -147,6 +150,27 @@ public enum Api {
 			public func getUrlWithId(_ id: String) -> String {
 				let url = Self.path + "/" + uri
 				return url.replacingOccurrences(of: ":id", with: id)
+			}
+		}
+		
+		// MARK: - Events
+		
+		/// Работа с событиями (новости с категорией event)
+		public enum Events {
+			public static let path = V1.path + "/" + Api.events
+			
+			/// Получить список событий
+			case list
+			
+			public var uri: String {
+				switch self {
+				case .list:
+					""
+				}
+			}
+			
+			public func getUrl() -> String {
+				return uri.isEmpty ? Self.path : Self.path + "/" + uri
 			}
 		}
 		

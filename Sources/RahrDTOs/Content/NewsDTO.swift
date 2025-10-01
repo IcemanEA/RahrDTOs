@@ -28,6 +28,8 @@ public struct NewsDTO: Codable, Sendable {
 	public let fileUrl: String?
 	public let linkUrl: String?
 	
+	public let sendIs: Bool?
+	
 	public enum CodingKeys: String, CodingKey {
 		case id
 		case title
@@ -43,6 +45,7 @@ public struct NewsDTO: Codable, Sendable {
 		case imageUrl = "image_url"
 		case fileUrl = "file_url"
 		case linkUrl = "link_url"
+		case sendIs = "send_is"
 	}
 	
 	public init(
@@ -59,7 +62,8 @@ public struct NewsDTO: Codable, Sendable {
 		textMd: String? = nil,
 		imageUrl: String? = nil,
 		fileUrl: String? = nil,
-		linkUrl: String? = nil
+		linkUrl: String? = nil,
+		sendIs: Bool? = nil
 	) {
 		self.id = id
 		self.title = title
@@ -75,6 +79,7 @@ public struct NewsDTO: Codable, Sendable {
 		self.imageUrl = imageUrl
 		self.fileUrl = fileUrl
 		self.linkUrl = linkUrl
+		self.sendIs = sendIs
 	}
 
 	public init(from decoder: any Decoder) throws {
@@ -93,30 +98,6 @@ public struct NewsDTO: Codable, Sendable {
 		self.imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
 		self.fileUrl = try container.decodeIfPresent(String.self, forKey: .fileUrl)
 		self.linkUrl = try container.decodeIfPresent(String.self, forKey: .linkUrl)
-	}
-}
-
-// MARK: - Convenience Extensions
-
-public extension NewsDTO {
-	
-	/// Проверить, является ли новость активной (по умолчанию false)
-	var isActive: Bool {
-		return activeIs ?? false
-	}
-	
-	/// Проверить, опубликована ли новость
-	var isPublished: Bool {
-		return datePublic != nil
-	}
-	
-	/// Проверить, есть ли напоминание
-	var hasReminder: Bool {
-		return dateReminder != nil
-	}
-	
-	/// Получить основной текст (Markdown приоритетнее HTML)
-	var mainText: String? {
-		return textMd ?? textHtml
+		self.sendIs = try container.decodeIfPresent(Bool.self, forKey: .sendIs)
 	}
 }
