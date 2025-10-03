@@ -33,6 +33,7 @@ public struct ConferenceMemberDTO: Codable, Sendable {
 	public let accountIs: Bool?
 	public let dtRegPlace: Int?
 	public let dtBag: Int?
+	public let nmoCode: String?
 	
 	public enum CodingKeys: String, CodingKey {
 		case id
@@ -59,6 +60,7 @@ public struct ConferenceMemberDTO: Codable, Sendable {
 		case accountIs = "account_is"
 		case dtRegPlace = "dt_reg_place"
 		case dtBag = "dt_bag"
+		case nmoCode = "nmo_code"
 	}
 	
 	public init(
@@ -85,7 +87,8 @@ public struct ConferenceMemberDTO: Codable, Sendable {
 		notes: String? = nil,
 		accountIs: Bool? = nil,
 		dtRegPlace: Int? = nil,
-		dtBag: Int? = nil
+		dtBag: Int? = nil,
+		nmoCode: String? = nil
 	) {
 		self.id = id
 		self.itemId = itemId
@@ -111,6 +114,7 @@ public struct ConferenceMemberDTO: Codable, Sendable {
 		self.accountIs = accountIs
 		self.dtRegPlace = dtRegPlace
 		self.dtBag = dtBag
+		self.nmoCode = nmoCode
 	}
 
 	public init(from decoder: any Decoder) throws {
@@ -139,5 +143,6 @@ public struct ConferenceMemberDTO: Codable, Sendable {
 		self.accountIs = try container.decodeIfPresent(Bool.self, forKey: .accountIs)
 		self.dtRegPlace = try container.decodeIfPresent(Int.self, forKey: .dtRegPlace)
 		self.dtBag = try container.decodeIfPresent(Int.self, forKey: .dtBag)
+		self.nmoCode = try container.decodeIfPresent(String.self, forKey: .nmoCode)
 	}
 }

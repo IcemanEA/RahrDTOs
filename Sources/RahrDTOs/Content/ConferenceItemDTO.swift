@@ -23,6 +23,7 @@ public struct ConferenceItemDTO: Codable, Sendable {
 	public let duration: Int?
 	public let nmoname: String?
 	public let nmocount: Int?
+	public let recordsTitle: String?
 	public let recordsUrl: String?
 	public let recordsCode: String?
 	public let seminarProgUrl: String?
@@ -46,6 +47,7 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		case duration
 		case nmoname
 		case nmocount
+		case recordsTitle = "records_title"
 		case recordsUrl = "records_url"
 		case recordsCode = "records_code"
 		case seminarProgUrl = "seminar_prog_url"
@@ -70,6 +72,7 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		duration: Int? = nil,
 		nmoname: String? = nil,
 		nmocount: Int? = nil,
+		recordsTitle: String? = nil,
 		recordsUrl: String? = nil,
 		recordsCode: String? = nil,
 		seminarProgUrl: String? = nil,
@@ -92,6 +95,7 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		self.duration = duration
 		self.nmoname = nmoname
 		self.nmocount = nmocount
+		self.recordsTitle = recordsTitle
 		self.recordsUrl = recordsUrl
 		self.recordsCode = recordsCode
 		self.seminarProgUrl = seminarProgUrl
@@ -117,6 +121,7 @@ public struct ConferenceItemDTO: Codable, Sendable {
 		self.duration = try container.decodeIfPresent(Int.self, forKey: .duration)
 		self.nmoname = try container.decodeIfPresent(String.self, forKey: .nmoname)
 		self.nmocount = try container.decodeIfPresent(Int.self, forKey: .nmocount)
+		self.recordsTitle = try container.decodeIfPresent(String.self, forKey: .recordsTitle)
 		self.recordsUrl = try container.decodeIfPresent(String.self, forKey: .recordsUrl)
 		self.recordsCode = try container.decodeIfPresent(String.self, forKey: .recordsCode)
 		self.seminarProgUrl = try container.decodeIfPresent(String.self, forKey: .seminarProgUrl)
