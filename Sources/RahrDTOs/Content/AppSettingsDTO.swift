@@ -19,6 +19,7 @@ public struct AppSettingsDTO: Codable, Sendable {
 	public let membershipPaymentUrl: String?
 	public let registrationWebsiteUrl: String?
 	public let passwordRecoveryUrl: String?
+	public let conferenceVideoUrl: String?
 	public let forceUpdate: Bool?
 	public let maintenanceMode: Bool?
 	public let activeIs: Bool?
@@ -32,6 +33,7 @@ public struct AppSettingsDTO: Codable, Sendable {
 		case membershipPaymentUrl = "membership_payment_url"
 		case registrationWebsiteUrl = "registration_website_url"
 		case passwordRecoveryUrl = "password_recovery_url"
+		case conferenceVideoUrl = "conference_video_url"
 		case forceUpdate = "force_update"
 		case maintenanceMode = "maintenance_mode"
 		case activeIs = "active_is"
@@ -46,6 +48,7 @@ public struct AppSettingsDTO: Codable, Sendable {
 		membershipPaymentUrl: String? = nil,
 		registrationWebsiteUrl: String? = nil,
 		passwordRecoveryUrl: String? = nil,
+		conferenceVideoUrl: String? = nil,
 		forceUpdate: Bool? = nil,
 		maintenanceMode: Bool? = nil,
 		activeIs: Bool? = nil
@@ -58,6 +61,7 @@ public struct AppSettingsDTO: Codable, Sendable {
 		self.membershipPaymentUrl = membershipPaymentUrl
 		self.registrationWebsiteUrl = registrationWebsiteUrl
 		self.passwordRecoveryUrl = passwordRecoveryUrl
+		self.conferenceVideoUrl = conferenceVideoUrl
 		self.forceUpdate = forceUpdate
 		self.maintenanceMode = maintenanceMode
 		self.activeIs = activeIs
@@ -73,6 +77,7 @@ public struct AppSettingsDTO: Codable, Sendable {
 		self.membershipPaymentUrl = try container.decodeIfPresent(String.self, forKey: .membershipPaymentUrl)
 		self.registrationWebsiteUrl = try container.decodeIfPresent(String.self, forKey: .registrationWebsiteUrl)
 		self.passwordRecoveryUrl = try container.decodeIfPresent(String.self, forKey: .passwordRecoveryUrl)
+		self.conferenceVideoUrl = try container.decodeIfPresent(String.self, forKey: .conferenceVideoUrl)
 		self.forceUpdate = try container.decodeIfPresent(Bool.self, forKey: .forceUpdate)
 		self.maintenanceMode = try container.decodeIfPresent(Bool.self, forKey: .maintenanceMode)
 		self.activeIs = try container.decodeIfPresent(Bool.self, forKey: .activeIs)
