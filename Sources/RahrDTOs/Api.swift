@@ -48,6 +48,9 @@ public enum Api {
 	/// Корневая точка доступа к работе с файлами
 	public static let files = "files"
 	
+	/// Корневая точка доступа к внешнему API
+	public static let external = "external"
+	
 	// MARK: - V1
 	
 	/// Первая версия точек доступа
@@ -414,6 +417,27 @@ public enum Api {
 			public func getUrlWithId(_ id: String) -> String {
 				let url = Self.path + "/" + uri
 				return url.replacingOccurrences(of: ":id", with: id)
+			}
+		}
+		
+		// MARK: - External
+		
+		/// Работа с внешним API для интеграции с внешними системами
+		public enum External {
+			public static let path = V1.path + "/" + Api.external
+			
+			/// Создать или получить профиль из данных внешней системы
+			case profile
+			
+			public var uri: String {
+				switch self {
+				case .profile:
+					"profile"
+				}
+			}
+			
+			public func getUrl() -> String {
+				return Self.path + "/" + uri
 			}
 		}
 	}
